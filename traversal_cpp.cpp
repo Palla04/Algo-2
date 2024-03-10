@@ -59,6 +59,72 @@ void inorder(node * root){
 		}
 	}while(1);
 }
+
+void preorder(node * root){
+	stack<node *>s;
+	while(root!=NULL)
+	{
+		cout<<root->data<<" ";
+		if(root->right!=NULL)
+		{
+			s.push(root->right);
+		}
+		if(root->left!=NULL)
+		{
+			root=root->left;
+		}
+		else
+		{
+			if(!s.empty())
+			{
+				root=s.top();
+				s.pop();
+			}
+			else
+			{
+			  break;
+			}
+			
+		}
+	}
+	
+}
+void postorder(node* root)
+{
+    stack<node*>st;
+    cout<<"\nIterative Postorder:-"<<endl;
+    do
+    {
+        while(root!=NULL)
+        {
+            if(root->right!=NULL)
+            {
+                st.push(root->right);
+            }
+            st.push(root);
+            root=root->left;  
+        }
+        if(!st.empty())
+        {
+            root=st.top();
+            st.pop();
+            if(root->right != NULL && !st.empty() && root->right == st.top())
+            {
+                st.pop();
+                st.push(root);
+                root=root->right;
+                
+            } 
+            else
+	        {
+	            cout<<root->data<<" ";
+	            root=NULL;
+	        }
+        }
+    }
+    while(!st.empty());
+}
+
 int main()
 {
 	node *root=NULL;
@@ -76,8 +142,13 @@ int main()
 		cin>>a;
 		root = insert(root,a);
  	}
-
+    printf("Inorder: ");
     inorder(root);
+    printf("\n");
+    printf("Preorder: ");
+    preorder(root);
+    printf("\n");
+    postorder(root);
 	display();
 	return 0;
 }
