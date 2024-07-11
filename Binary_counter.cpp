@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-int Increment(int A[],int k)
+void Increment(int A[],int k)
 {
 	int i=0;
 	for(i=k-1;i>=0;i--)
